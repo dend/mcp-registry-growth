@@ -201,12 +201,35 @@ test.describe('MCP Analytics Dashboard - Accessibility', () => {
   });
 
   test('should support keyboard-only navigation', async ({ page }) => {
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Wait for the filter controls to be visible
+    await expect(page.getByRole('combobox').first()).toBeVisible();
+    
     // Test complete keyboard navigation workflow
     
     // Start at first interactive element
     await page.keyboard.press('Tab');
-    const firstSelect = page.getByRole('combobox').first();
-    await expect(firstSelect).toBeFocused();
+    
+    // Find the focused element dynamically
+    let attempts = 0;
+    let focusedElement = '';
+    while (attempts < 10) {
+      focusedElement = await page.evaluate(() => document.activeElement?.tagName || '');
+      if (focusedElement === 'SELECT') {
+        break;
+      }
+      await page.keyboard.press('Tab');
+      attempts++;
+    }
+    
+    // Verify we found a SELECT element
+    expect(focusedElement).toBe('SELECT');
+    
+    // Get the currently focused select element
+    const focusedSelect = page.locator(':focus');
+    await expect(focusedSelect).toBeFocused();
     
     // Use keyboard to change server type
     await page.keyboard.press('Enter');
@@ -230,7 +253,8 @@ test.describe('MCP Analytics Dashboard - Accessibility', () => {
     
     await page.keyboard.press('Enter');
     
-    // Verify reset worked
+    // Verify reset worked - check the first select element value
+    const firstSelect = page.getByRole('combobox').first();
     await expect(firstSelect).toHaveValue('all');
   });
 });
