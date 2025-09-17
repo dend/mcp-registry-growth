@@ -42,7 +42,9 @@ export async function loadAnalyticsData(): Promise<AnalyticsDataPoint[]> {
   
   try {
     // Try to fetch the JSON data from the public directory
-    const response = await fetch('/data/analytics.json');
+    // Handle basePath for GitHub Pages deployment
+    const basePath = process.env.NODE_ENV === 'production' ? '/mcp-registry-growth' : '';
+    const response = await fetch(`${basePath}/data/analytics.json`);
     
     if (response.ok) {
       data = await response.json();
