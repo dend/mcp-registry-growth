@@ -1,107 +1,37 @@
 [
   {
-    "timestamp": "2025-08-01T00:00:00.000Z",
-    "totalCount": 125,
-    "localCount": 85,
-    "remoteCount": 40,
-    "uniqueCount": 120
-  },
-  {
-    "timestamp": "2025-08-01T12:00:00.000Z",
-    "totalCount": 126,
-    "localCount": 86,
-    "remoteCount": 40,
-    "uniqueCount": 121
-  },
-  {
-    "timestamp": "2025-08-02T00:00:00.000Z",
-    "totalCount": 128,
-    "localCount": 87,
-    "remoteCount": 41,
-    "uniqueCount": 123
-  },
-  {
-    "timestamp": "2025-08-03T00:00:00.000Z",
-    "totalCount": 129,
-    "localCount": 88,
-    "remoteCount": 41,
-    "uniqueCount": 124
-  },
-  {
-    "timestamp": "2025-08-05T00:00:00.000Z",
-    "totalCount": 132,
-    "localCount": 90,
-    "remoteCount": 42,
-    "uniqueCount": 127
-  },
-  {
-    "timestamp": "2025-08-08T00:00:00.000Z",
-    "totalCount": 135,
-    "localCount": 92,
-    "remoteCount": 43,
-    "uniqueCount": 130
-  },
-  {
-    "timestamp": "2025-08-12T00:00:00.000Z",
-    "totalCount": 139,
-    "localCount": 95,
-    "remoteCount": 44,
-    "uniqueCount": 134
-  },
-  {
-    "timestamp": "2025-08-15T00:00:00.000Z",
-    "totalCount": 143,
-    "localCount": 98,
-    "remoteCount": 45,
-    "uniqueCount": 138
-  },
-  {
-    "timestamp": "2025-08-20T00:00:00.000Z",
-    "totalCount": 149,
-    "localCount": 102,
-    "remoteCount": 47,
-    "uniqueCount": 144
-  },
-  {
-    "timestamp": "2025-08-25T00:00:00.000Z",
-    "totalCount": 153,
-    "localCount": 105,
-    "remoteCount": 48,
-    "uniqueCount": 148
-  },
-  {
-    "timestamp": "2025-09-01T00:00:00.000Z",
-    "totalCount": 160,
-    "localCount": 110,
-    "remoteCount": 50,
-    "uniqueCount": 155
-  },
-  {
-    "timestamp": "2025-09-05T00:00:00.000Z",
-    "totalCount": 167,
-    "localCount": 115,
-    "remoteCount": 52,
-    "uniqueCount": 162
-  },
-  {
-    "timestamp": "2025-09-10T00:00:00.000Z",
-    "totalCount": 174,
-    "localCount": 120,
-    "remoteCount": 54,
-    "uniqueCount": 169
-  },
-  {
-    "timestamp": "2025-09-15T00:00:00.000Z",
-    "totalCount": 188,
-    "localCount": 130,
-    "remoteCount": 58,
-    "uniqueCount": 183
-  },
-  {
-    "timestamp": "2025-09-16T18:55:34.192Z",
-    "totalCount": 340,
+    "timestamp": "2025-09-16T20:21:46.692Z",
+    "totalCount": 345,
     "localCount": 205,
-    "remoteCount": 141,
-    "uniqueCount": 236
+    "remoteCount": 146,
+    "uniqueCount": 238
+  },
+  {
+    "timestamp": "2025-09-16T20:23:34.600Z",
+    "totalCount": 345,
+    "localCount": 205,
+    "remoteCount": 146,
+    "uniqueCount": 238
+  },
+  {
+    "timestamp": "2025-09-17T03:28:50.220Z",
+    "totalCount": 345,
+    "localCount": 205,
+    "remoteCount": 146,
+    "uniqueCount": 238
+  },
+  {
+    "timestamp": "2025-09-17T03:29:48.845Z",
+    "totalCount": 345,
+    "localCount": 205,
+    "remoteCount": 146,
+    "uniqueCount": 238
+  },
+  {
+    "timestamp": "2025-09-17T04:08:20.123Z",
+    "totalCount": 346,
+    "localCount": 205,
+    "remoteCount": 147,
+    "uniqueCount": 239
   }
 ]
