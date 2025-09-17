@@ -1,0 +1,40 @@
+name: MCP Registry Data Collection
+
+on:
+  schedule:
+    # Run every hour at minute 0
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  collect-data:
+    name: 'Collect MCP Registry Data'
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+          
+      - name: Collect MCP server data
+        shell: pwsh
+        run: |
+          Write-Host "🚀 Starting MCP data collection..."
+          .\scripts\Collect-MCPData.ps1 -OutputPath 'data/analytics.csv' -Verbose
+          
+      - name: Commit and push data updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/analytics.csv
+          
+          if git diff --staged --quiet; then
+            echo "No data changes detected"
+          else
+            $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
+            git commit -m "chore: update MCP registry data - $timestamp"
+            git push
+            echo "✅ Data committed and pushed successfully"
+          fi
+        shell: pwsh
