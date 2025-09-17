@@ -182,7 +182,7 @@ function Export-AnalyticsData {
     $existingData = @()
     if (Test-Path $Path) {
         try {
-            $existingData = Import-Csv $Path
+            $existingData = @(Import-Csv $Path)
             Write-Host "Found existing data with $($existingData.Count) records" -ForegroundColor Yellow
         }
         catch {
@@ -191,7 +191,7 @@ function Export-AnalyticsData {
     }
     
     # Add new entry to existing data
-    $allData = $existingData + $analyticsEntry
+    $allData = @($existingData) + @($analyticsEntry)
     
     # Ensure output directory exists
     $outputDir = Split-Path $Path -Parent
