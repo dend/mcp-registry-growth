@@ -29,12 +29,14 @@ jobs:
           git config --local user.name "GitHub Action"
           git add data/analytics.csv
           
-          if git diff --staged --quiet; then
-            echo "No data changes detected"
-          else
+          # Check if there are changes to commit
+          git diff --staged --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No data changes detected"
+          } else {
             $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
             git commit -m "chore: update MCP registry data - $timestamp"
             git push
-            echo "✅ Data committed and pushed successfully"
-          fi
+            Write-Host "✅ Data committed and pushed successfully"
+          }
         shell: pwsh
