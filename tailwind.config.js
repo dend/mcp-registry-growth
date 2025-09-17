@@ -19,7 +19,7 @@ module.exports = {
           foreground: 'hsl(210 40% 98%)',
         },
         secondary: {
-          DEFAULT: 'hsl(215.4 16.3% 26.9%)', // Blue
+          DEFAULT: 'hsl(215.4 16.3% 46.9%)', // Lighter blue for better contrast
           foreground: 'hsl(210 40% 98%)',
         },
         accent: {

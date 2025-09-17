@@ -113,13 +113,20 @@ test.describe('MCP Analytics Dashboard - Complete User Journey', () => {
   });
 
   test('should be keyboard accessible', async ({ page }) => {
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    
+    // Wait for the filter controls to be visible
+    await expect(page.getByRole('combobox').first()).toBeVisible();
+    
     // Start from the beginning of the page
     await page.keyboard.press('Tab');
     
     // Find the first focusable element (might need to skip some elements)
     let attempts = 0;
+    let focusedElement = '';
     while (attempts < 10) {
-      const focusedElement = await page.evaluate(() => document.activeElement?.tagName);
+      focusedElement = await page.evaluate(() => document.activeElement?.tagName || '');
       if (focusedElement === 'SELECT') {
         break;
       }
@@ -127,9 +134,12 @@ test.describe('MCP Analytics Dashboard - Complete User Journey', () => {
       attempts++;
     }
     
-    // Should be able to navigate to first select
-    const firstSelect = page.getByRole('combobox').first();
-    await expect(firstSelect).toBeFocused();
+    // Verify we found a SELECT element
+    expect(focusedElement).toBe('SELECT');
+    
+    // Get the currently focused select element
+    const focusedSelect = page.locator(':focus');
+    await expect(focusedSelect).toBeFocused();
     
     // Test keyboard interaction with select
     await page.keyboard.press('Enter');
