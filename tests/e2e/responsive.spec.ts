@@ -11,8 +11,8 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
     });
 
     test('should display all components in desktop layout', async ({ page }) => {
-      // Check main content header is visible (not header banner)
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      // Check main heading in header is visible
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       
       // Check all filter controls are visible
       const comboboxes = page.getByRole('combobox');
@@ -43,7 +43,7 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
 
     test('should adapt layout for tablet', async ({ page }) => {
       // Header should still be visible
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       
       // Chart should remain visible and responsive
       await expect(page.locator('.recharts-responsive-container')).toBeVisible();
@@ -75,7 +75,7 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
 
     test('should display mobile-optimized layout', async ({ page }) => {
       // Header should be visible and properly sized
-      const heading = page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' });
+      const heading = page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 });
       await expect(heading).toBeVisible();
       
       // Check that text is readable on mobile
@@ -141,7 +141,7 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
 
     test('should optimize for larger mobile screens', async ({ page }) => {
       // All content should be visible
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       await expect(page.locator('.recharts-responsive-container')).toBeVisible();
       
       // Summary cards should have appropriate sizing
@@ -166,7 +166,7 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
       await expect(chartContainer).toBeVisible();
       
       // All components should remain visible and well-proportioned
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       await expect(page.getByText('Current Total')).toBeVisible();
     });
   });
@@ -183,7 +183,7 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
         await page.setViewportSize({ width, height });
         
         // Core functionality should work across all devices
-        await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
         
         // Data loading should work
         await page.waitForLoadState('networkidle');
@@ -207,13 +207,13 @@ test.describe('MCP Analytics Dashboard - Responsive Design', () => {
       await page.setViewportSize({ width: 375, height: 667 });
       
       // Verify initial state
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       
       // Switch to landscape
       await page.setViewportSize({ width: 667, height: 375 });
       
       // Content should still be accessible
-      await expect(page.getByRole('main').getByRole('heading', { name: 'MCP Registry Analytics' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'MCP Registry Analytics', level: 1 })).toBeVisible();
       await expect(page.locator('.recharts-responsive-container')).toBeVisible();
     });
   });

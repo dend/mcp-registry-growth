@@ -122,14 +122,6 @@ export default function AnalyticsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            MCP Registry Analytics
-          </h1>
-          <p className="text-muted-foreground">
-            Tracking Model Context Protocol server growth
-          </p>
-        </div>
         <LoadingState message="Loading analytics data..." />
       </div>
     );
@@ -137,16 +129,7 @@ export default function AnalyticsPage() {
 
   if (error) {
     return (
-      <div className="space-y-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            MCP Registry Analytics
-          </h1>
-          <p className="text-muted-foreground">
-            Tracking Model Context Protocol server growth
-          </p>
-        </div>
-        
+      <div className="space-y-6">        
         <Card className="max-w-2xl mx-auto">
           <CardHeader>
             <CardTitle className="text-destructive">Error Loading Data</CardTitle>

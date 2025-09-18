@@ -27,9 +27,9 @@ export default function RootLayout({
             <header className="border-b bg-card">
               <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold animate-gradient-shift">
+                  <h1 className="text-2xl font-bold animate-gradient-shift">
                     MCP Registry Analytics
-                  </h2>
+                  </h1>
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-muted-foreground">Last updated:</span>
                     <div className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs font-medium">

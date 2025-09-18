@@ -9,11 +9,8 @@ test.describe('MCP Analytics Dashboard - Complete User Journey', () => {
     // Check page title
     await expect(page).toHaveTitle(/MCP Registry Growth Analytics/);
     
-    // Check main content heading (not header)
-    await expect(page.getByRole('main').getByRole('heading', { name: /MCP Registry Analytics/i })).toBeVisible();
-    
-    // Check subtitle
-    await expect(page.getByText(/Model Context Protocol server growth tracking/i)).toBeVisible();
+    // Check main heading in header
+    await expect(page.getByRole('heading', { name: /MCP Registry Analytics/i, level: 1 })).toBeVisible();
   });
 
   test('should display summary statistics cards', async ({ page }) => {
@@ -81,12 +78,13 @@ test.describe('MCP Analytics Dashboard - Complete User Journey', () => {
     // Scroll to footer to ensure it's visible
     await page.locator('footer').scrollIntoViewIfNeeded();
     
-    // Check footer links using exact link selectors
-    await expect(page.getByRole('link', { name: 'MCP Servers Repository' })).toBeVisible();
+    // Check footer links
+    await expect(page.getByRole('link', { name: 'Den Delimarsky' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'MCP registry' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Model Context Protocol' })).toBeVisible();
     
     // Check copyright text
-    await expect(page.getByText(/© \d{4} MCP Registry Analytics/)).toBeVisible();
+    await expect(page.getByText(/© \d{4} Copyright Den Delimarsky/)).toBeVisible();
   });
 
   test('should display about section', async ({ page }) => {
