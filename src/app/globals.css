@@ -80,6 +80,24 @@
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
+  .animate-gradient-shift {
+    background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
   /* Responsive text utilities */
   .text-responsive {
     @apply text-sm sm:text-base lg:text-lg;

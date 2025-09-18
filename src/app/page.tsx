@@ -172,16 +172,6 @@ export default function AnalyticsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <header className="text-center">
-        <h1 className="text-3xl font-bold text-foreground mb-2">
-          MCP Registry Analytics
-        </h1>
-        <p className="text-muted-foreground">
-          Tracking Model Context Protocol server growth over time
-        </p>
-      </header>
-
       {/* Summary Cards */}
       <section aria-label="Summary statistics">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

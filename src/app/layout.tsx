@@ -27,17 +27,14 @@ export default function RootLayout({
             <header className="border-b bg-card">
               <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h2 className="text-2xl font-bold text-primary">
-                      MCP Registry Analytics
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                      Model Context Protocol server growth tracking
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                    <span>Last updated:</span>
-                    <time>{new Date().toLocaleDateString()}</time>
+                  <h2 className="text-2xl font-bold animate-gradient-shift">
+                    MCP Registry Analytics
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-muted-foreground">Last updated:</span>
+                    <div className="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs font-medium">
+                      {new Date().toLocaleDateString()}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -51,19 +48,27 @@ export default function RootLayout({
               <div className="container mx-auto px-4 py-4">
                 <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-muted-foreground">
                   <p>
-                    © {new Date().getFullYear()} MCP Registry Analytics by Den Delimarsky. 
-                    Data collected from the official MCP registry.
-                  </p>
-                  <div className="flex items-center space-x-4 mt-2 sm:mt-0">
+                    © {new Date().getFullYear()} Copyright{' '}
                     <a 
-                      href="https://github.com/modelcontextprotocol/servers" 
+                      href="https://den.dev" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="hover:text-primary transition-colors"
+                      className="hover:text-primary transition-colors underline"
                     >
-                      MCP Servers Repository
+                      Den Delimarsky
                     </a>
-                    <span>•</span>
+                    . Data collected from the official{' '}
+                    <a 
+                      href="https://github.com/modelcontextprotocol/registry" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:text-primary transition-colors underline"
+                    >
+                      MCP registry
+                    </a>
+                    .
+                  </p>
+                  <div className="flex items-center space-x-4 mt-2 sm:mt-0">
                     <a 
                       href="https://modelcontextprotocol.io" 
                       target="_blank" 
