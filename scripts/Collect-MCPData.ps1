@@ -63,7 +63,14 @@ function Invoke-HttpRequestWithRetry {
 
 # Function to classify server type based on API response
 function Get-ServerClassification {
-    param([PSCustomObject]$Server)
+    param([PSCustomObject]$ServerEntry)
+    
+    # Extract the actual server object from the response
+    $Server = $ServerEntry.server
+    if (-not $Server) {
+        Write-Warning "Server entry has no 'server' property"
+        return @("local")
+    }
     
     $hasPackages = $null -ne $Server.packages -and $Server.packages.Count -gt 0
     $hasRemotes = $null -ne $Server.remotes -and $Server.remotes.Count -gt 0
@@ -116,16 +123,26 @@ function Get-AllMCPServers {
             Write-Host "Page $pageCount`: $serversOnPage servers" -ForegroundColor Green
             
             # Process each server
-            foreach ($server in $response.servers) {
-                $script:AllServers += $server
+            foreach ($serverEntry in $response.servers) {
+                $script:AllServers += $serverEntry
                 
-                # Track unique server names
-                if (-not $script:UniqueServerNames.ContainsKey($server.name)) {
-                    $script:UniqueServerNames[$server.name] = $true
+                # Extract the server name from the nested structure
+                $serverName = $serverEntry.server.name
+                
+                # Track unique server names (skip if name is null or empty)
+                if ($serverName -and -not [string]::IsNullOrWhiteSpace($serverName)) {
+                    if (-not $script:UniqueServerNames.ContainsKey($serverName)) {
+                        $script:UniqueServerNames[$serverName] = $true
+                    }
+                } else {
+                    Write-Warning "Server with null or empty name found (skipping unique tracking)"
+                    if ($DebugMode) {
+                        Write-Host "  Server object: $($serverEntry | ConvertTo-Json -Compress)" -ForegroundColor DarkGray
+                    }
                 }
                 
                 # Classify server type(s)
-                $classifications = Get-ServerClassification -Server $server
+                $classifications = Get-ServerClassification -ServerEntry $serverEntry
                 
                 foreach ($classification in $classifications) {
                     if ($classification -eq "local") {
@@ -138,12 +155,12 @@ function Get-AllMCPServers {
                 $script:TotalCount++
                 
                 if ($DebugMode) {
-                    Write-Host "  Server $($server.name): $($classifications -join ', ')" -ForegroundColor Gray
+                    Write-Host "  Server $($serverName): $($classifications -join ', ')" -ForegroundColor Gray
                 }
             }
             
             # Get next cursor for pagination
-            $cursor = $response.metadata.next_cursor
+            $cursor = $response.metadata.nextCursor
             
             if ($DebugMode) {
                 Write-Host "Next cursor: $cursor" -ForegroundColor Gray
@@ -233,8 +250,8 @@ try {
         Write-Host ""
         Write-Host "Sample servers collected:" -ForegroundColor Cyan
         $AllServers | Select-Object -First 3 | ForEach-Object {
-            $classifications = Get-ServerClassification -Server $_
-            Write-Host "  • $($_.name) - $($classifications -join ', ')" -ForegroundColor Gray
+            $classifications = Get-ServerClassification -ServerEntry $_
+            Write-Host "  • $($_.server.name) - $($classifications -join ', ')" -ForegroundColor Gray
         }
     }
 }
