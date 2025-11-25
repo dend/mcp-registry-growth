@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/mcp-registry-growth' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/mcp-registry-growth/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
   eslint: {
     // Ignore ESLint errors during builds
     ignoreDuringBuilds: true,
