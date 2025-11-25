@@ -42,9 +42,8 @@ export async function loadAnalyticsData(): Promise<AnalyticsDataPoint[]> {
   
   try {
     // Try to fetch the JSON data from the public directory
-    // Handle basePath for GitHub Pages deployment
-    const basePath = process.env.NODE_ENV === 'production' ? '/mcp-registry-growth' : '';
-    const response = await fetch(`${basePath}/data/analytics.json`);
+    // Use relative path - basePath is handled by Next.js at the routing level
+    const response = await fetch(`./data/analytics.json`);
     
     if (response.ok) {
       data = await response.json();
