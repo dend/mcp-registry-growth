@@ -79,12 +79,12 @@ test.describe('MCP Analytics Dashboard - Complete User Journey', () => {
     await page.locator('footer').scrollIntoViewIfNeeded();
     
     // Check footer links
-    await expect(page.getByRole('link', { name: 'Den Delimarsky' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Den' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'MCP registry' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Model Context Protocol' })).toBeVisible();
     
     // Check copyright text
-    await expect(page.getByText(/© \d{4} Copyright Den Delimarsky/)).toBeVisible();
+    await expect(page.getByText(/© \d{4} Copyright Den/)).toBeVisible();
   });
 
   test('should display about section', async ({ page }) => {

@@ -55,7 +55,7 @@ export default function RootLayout({
                       rel="noopener noreferrer"
                       className="hover:text-primary transition-colors underline"
                     >
-                      Den Delimarsky
+                      Den
                     </a>
                     . Data collected from the official{' '}
                     <a 
