@@ -12,6 +12,10 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: write
+      pull-requests: write
+    concurrency:
+      group: data-collection
+      cancel-in-progress: false
       
     steps:
       - name: Checkout repository
@@ -23,20 +27,15 @@ jobs:
           Write-Host "🚀 Starting MCP data collection..."
           .\scripts\Collect-MCPData.ps1 -OutputPath 'data/analytics.csv' -Verbose
           
-      - name: Commit and push data updates
+      # Signed commit through the API, merged through a PR (required by the branch rulesets).
+      - name: Commit data updates
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git add data/analytics.csv
-          
-          # Check if there are changes to commit
-          git diff --staged --quiet
-          if ($LASTEXITCODE -eq 0) {
-            Write-Host "No data changes detected"
-          } else {
-            $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss UTC"
-            git commit -m "chore: update MCP registry data - $timestamp"
-            git push
-            Write-Host "✅ Data committed and pushed successfully"
-          }
-        shell: pwsh
+          bash .github/scripts/commit-signed.sh \
+            "bot/data-${{ github.run_id }}-${{ github.run_attempt }}" \
+            "chore: update MCP registry data - $(date -u '+%Y-%m-%d %H:%M:%S UTC')" \
+            main
